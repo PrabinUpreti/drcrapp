@@ -56,7 +56,6 @@ export const deleteUser = async (id) => {
     const deletedUser = await User.deleteOne({ _id: id });
     if (deletedUser.deletedCount === 1) return "Deleted Sucessfully";
     else return "Failed To Delete";
-    console.log(deletedUser);
   } catch (error) {
     console.error("Error fetching users:", error);
   }
