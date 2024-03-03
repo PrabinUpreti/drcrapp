@@ -1,62 +1,65 @@
-import User from "../models/users.js";
+import Party from "../models/parties.js";
 
-export const getUsers = async () => {
+export const getParties = async () => {
   try {
-    const users = await User.find();
-    return users;
+    const parties = await Party.find();
+    return parties;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error fetching parties:", error);
   }
 };
 
-export const getUser = async (id) => {
+export const getParty = async (id) => {
   try {
-    const user = await User.findById(id);
-    return user;
+    const party = await Party.findById(id);
+    return party;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error fetching party:", error);
   }
 };
 
-export const saveUser = async (param) => {
+export const saveParty = async (param) => {
   try {
-    const newUser = new User({
-      username: param.username,
-      email: param.email,
-      password: param.password,
+    const newParty = new Party({
+      name: param.name,
+      phone: param.phone,
+      address: param.address,
+      photo: param.photo,
+      createdBy: param.createdBy,
     });
-    const savedUser = await newUser.save();
-    return savedUser;
+    const savedParty = await newParty.save();
+    return savedParty;
   } catch (error) {
     console.log(error);
     return "Existing information";
   }
 };
 
-export const updateUser = async (id, param) => {
+export const updateParty = async (id, param) => {
   try {
-    const updatedUser = await User.findOneAndUpdate(
+    const updatedParty = await Party.findOneAndUpdate(
       { _id: id },
       {
-        username: param.username,
-        email: param.email,
-        password: param.password,
+        name: param.name,
+        phone: param.phone,
+        address: param.address,
+        photo: param.photo,
+        createdBy: param.createdBy,
       },
       { new: true }
     );
-    if (updateUser) return updatedUser;
-    else return "User Not Found";
+    if (updatedParty) return updatedParty;
+    else return "Party Not Found";
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteParty = async (id) => {
   try {
-    const deletedUser = await User.deleteOne({ _id: id });
-    if (deletedUser.deletedCount === 1) return "Deleted Sucessfully";
+    const deletedParty = await Party.deleteOne({ _id: id });
+    if (deletedParty.deletedCount === 1) return "Deleted Sucessfully";
     else return "Failed To Delete";
-    console.log(deletedUser);
   } catch (error) {
     console.error("Error fetching users:", error);
   }

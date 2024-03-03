@@ -1,18 +1,30 @@
 import express from "express";
+import {
+  deleteTransaction,
+  getTransaction,
+  getTransactions,
+  saveTransaction,
+  updateTransaction,
+} from "../controllers/transactionController.js";
 const transactionRoutes = express.Router();
 
-transactionRoutes.get("/", (req, res) => {
-  res.send("Transantion Root");
-});
-transactionRoutes.post("/", (req, res) => {
-  res.send("party post");
+transactionRoutes.get("/", async (req, res) => {
+  res.json(await getTransactions());
 });
 
-transactionRoutes.put("/:id", (req, res) => {
-  res.send("party put");
+transactionRoutes.get("/:id", async (req, res) => {
+  res.json(await getTransaction(req.params.id));
 });
 
-transactionRoutes.delete("/:id", (req, res) => {
-  res.send("party delete");
+transactionRoutes.post("/", async (req, res) => {
+  res.json(await saveTransaction(req.body));
+});
+
+transactionRoutes.put("/:id", async (req, res) => {
+  res.json(await updateTransaction(req.params.id, req.body));
+});
+
+transactionRoutes.delete("/:id", async (req, res) => {
+  res.json(await deleteTransaction(req.params.id));
 });
 export default transactionRoutes;

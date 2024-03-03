@@ -1,30 +1,30 @@
 import express from "express";
 import {
-  deleteUser,
-  getUser,
-  getUsers,
-  saveUser,
-  updateUser,
-} from "../controllers/userController.js";
+  deleteParty,
+  getParty,
+  getParties,
+  saveParty,
+  updateParty,
+} from "../controllers/partyController.js";
 const partyRoutes = express.Router();
 
 partyRoutes.get("/", async (req, res) => {
-  res.json(await getUsers());
+  res.json(await getParties());
 });
 
 partyRoutes.get("/:id", async (req, res) => {
-  res.json(await getUser(req.params.id));
+  res.json(await getParty(req.params.id));
 });
 
 partyRoutes.post("/", async (req, res) => {
-  res.json(await saveUser(req.body));
+  res.json(await saveParty(req.body));
 });
 
 partyRoutes.put("/:id", async (req, res) => {
-  res.json(await updateUser(req.params.id, req.body));
+  res.json(await updateParty(req.params.id, req.body));
 });
 
 partyRoutes.delete("/:id", async (req, res) => {
-  res.json(await deleteUser(req.params.id));
+  res.json(await deleteParty(req.params.id));
 });
 export default partyRoutes;
