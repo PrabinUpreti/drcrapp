@@ -18,9 +18,7 @@ userRoutes.get("/:id", async (req, res) => {
   res.json(await getUser(req.params.id));
 });
 
-userRoutes.post("/", userValidation, hash, async (req, res) => {
-  res.json(await saveUser(req.body));
-});
+userRoutes.post("/", userValidation, hash, saveUser);
 
 userRoutes.put("/:id", userValidation, hash, async (req, res) => {
   res.json(await updateUser(req.params.id, req.body));
