@@ -1,9 +1,5 @@
 import User from "../models/users.js";
-import dotenv from "dotenv";
 import lodash from "lodash";
-import jwt from "jsonwebtoken";
-
-dotenv.config();
 
 export const getUsers = async () => {
   try {
@@ -36,13 +32,13 @@ export const saveUser = async (req, res, next) => {
       password: req.body.password,
     });
     const savedUser = await newUser.save();
-    const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_TOKEN);
+    const token = savedUser.generateAuthToken();
     res
       .header("x-auth-toket", token)
       .json(lodash.pick(savedUser, ["_id", "username", "email"]));
   } catch (error) {
     console.log(error);
-    return "Existing information";
+    res.send("Existing information");
   }
 };
 
