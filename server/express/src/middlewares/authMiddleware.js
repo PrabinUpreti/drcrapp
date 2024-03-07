@@ -15,7 +15,7 @@ export const login = async (req, res, next) => {
     console.log(matchedPassword);
     if (!matchedPassword) res.status(400).send("Invalid User or Password");
 
-    const token = jwt.sign({ _id: existUser._id }, process.env.JWT_TOKEN);
+    const token = existUser.generateAuthToken();
     res.status(200).send(token);
   } catch (error) {
     console.log(error);
