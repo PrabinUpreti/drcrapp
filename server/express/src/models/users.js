@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config();
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -15,6 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isAdmin: Boolean,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -34,6 +38,14 @@ userSchema.pre("findOneAndUpdate", function (next) {
   this._update.updatedAt = new Date();
   next();
 });
+
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+    process.env.JWT_TOKEN
+  );
+  return token;
+};
 
 const User = mongoose.model("User", userSchema);
 export default User;

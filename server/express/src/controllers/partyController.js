@@ -1,62 +1,72 @@
-import User from "../models/users.js";
+import Party from "../models/parties.js";
+import jwt from "jsonwebtoken";
 
-export const getUsers = async () => {
+export const getParties = async () => {
   try {
-    const users = await User.find();
-    return users;
+    const parties = await Party.find();
+    return parties;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error fetching parties:", error);
   }
 };
 
-export const getUser = async (id) => {
+export const getParty = async (id) => {
   try {
-    const user = await User.findById(id);
-    return user;
+    const party = await Party.findById(id);
+    return party;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error fetching party:", error);
   }
 };
 
-export const saveUser = async (param) => {
+export const saveParty = async (req, res, next) => {
   try {
-    const newUser = new User({
-      username: param.username,
-      email: param.email,
-      password: param.password,
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
+    const newParty = new Party({
+      name: req.body.name,
+      phone: req.body.phone,
+      address: req.body.address,
+      photo: req.body.photo,
+      createdBy: createdBy,
     });
-    const savedUser = await newUser.save();
-    return savedUser;
+    const savedParty = await newParty.save();
+    res.json(savedParty);
   } catch (error) {
-    console.log(error);
     return "Existing information";
   }
 };
 
-export const updateUser = async (id, param) => {
+export const updateParty = async (req, res, next) => {
   try {
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: id },
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
+
+    const updatedParty = await Party.findOneAndUpdate(
+      { _id: req.params.id },
       {
-        username: param.username,
-        email: param.email,
-        password: param.password,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        photo: req.body.photo,
+        createdBy: createdBy,
       },
       { new: true }
     );
-    if (updateUser) return updatedUser;
-    else return "User Not Found";
+    if (updatedParty) res.json(updatedParty);
+    else res.send("Party Not Found");
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteParty = async (id) => {
   try {
-    const deletedUser = await User.deleteOne({ _id: id });
-    if (deletedUser.deletedCount === 1) return "Deleted Sucessfully";
+    const deletedParty = await Party.deleteOne({ _id: id });
+    if (deletedParty.deletedCount === 1) return "Deleted Sucessfully";
     else return "Failed To Delete";
-    console.log(deletedUser);
   } catch (error) {
     console.error("Error fetching users:", error);
   }
