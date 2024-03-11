@@ -16,13 +16,9 @@ transactionRoutes.get("/:id", async (req, res) => {
   res.json(await getTransaction(req.params.id));
 });
 
-transactionRoutes.post("/", async (req, res) => {
-  res.json(await saveTransaction(req.body));
-});
+transactionRoutes.post("/", saveTransaction);
 
-transactionRoutes.put("/:id", async (req, res) => {
-  res.json(await updateTransaction(req.params.id, req.body));
-});
+transactionRoutes.put("/:id", updateTransaction);
 
 transactionRoutes.delete("/:id", async (req, res) => {
   res.json(await deleteTransaction(req.params.id));

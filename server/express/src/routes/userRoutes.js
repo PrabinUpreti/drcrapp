@@ -3,14 +3,23 @@ import {
   deleteUser,
   getUser,
   getUsers,
+  getMe,
   saveUser,
   updateUser,
 } from "../controllers/userController.js";
 import { userValidation } from "../middlewares/validationMiddleware.js";
 import { hash } from "../middlewares/hashMiddleware.js";
+import { authorize } from "../middlewares/authorizationMiddleware.js";
+import { admin } from "../middlewares/adminMiddleware.js";
 const userRoutes = express.Router();
 
-userRoutes.get("/", async (req, res) => {
+userRoutes.use(admin);
+
+userRoutes.get("/me", async (req, res) => {
+  res.json(await getMe(req.user));
+});
+
+userRoutes.get("/", authorize, async (req, res) => {
   res.json(await getUsers());
 });
 
