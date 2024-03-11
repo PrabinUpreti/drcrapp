@@ -1,4 +1,5 @@
 import Party from "../models/parties.js";
+import jwt from "jsonwebtoken";
 
 export const getParties = async () => {
   try {
@@ -18,38 +19,44 @@ export const getParty = async (id) => {
   }
 };
 
-export const saveParty = async (param) => {
+export const saveParty = async (req, res, next) => {
   try {
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
     const newParty = new Party({
-      name: param.name,
-      phone: param.phone,
-      address: param.address,
-      photo: param.photo,
-      createdBy: param.createdBy,
+      name: req.body.name,
+      phone: req.body.phone,
+      address: req.body.address,
+      photo: req.body.photo,
+      createdBy: createdBy,
     });
     const savedParty = await newParty.save();
-    return savedParty;
+    res.json(savedParty);
   } catch (error) {
-    console.log(error);
     return "Existing information";
   }
 };
 
-export const updateParty = async (id, param) => {
+export const updateParty = async (req, res, next) => {
   try {
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
+
     const updatedParty = await Party.findOneAndUpdate(
-      { _id: id },
+      { _id: req.params.id },
       {
-        name: param.name,
-        phone: param.phone,
-        address: param.address,
-        photo: param.photo,
-        createdBy: param.createdBy,
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        photo: req.body.photo,
+        createdBy: createdBy,
       },
       { new: true }
     );
-    if (updatedParty) return updatedParty;
-    else return "Party Not Found";
+    if (updatedParty) res.json(updatedParty);
+    else res.send("Party Not Found");
   } catch (error) {
     console.log(error);
   }

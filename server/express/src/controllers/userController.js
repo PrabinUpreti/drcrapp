@@ -22,6 +22,15 @@ export const getUser = async (id) => {
   }
 };
 
+export const getMe = async (userId) => {
+  try {
+    const user = await User.findById(userId._id).select("-password");
+    return user;
+  } catch (ex) {
+    console.log(ex);
+  }
+};
+
 export const saveUser = async (req, res, next) => {
   try {
     const existUser = await User.findOne({ email: req.body.email });
