@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isAdmin: Boolean,
   createdAt: {
     type: Date,
     default: Date.now,
@@ -39,7 +40,10 @@ userSchema.pre("findOneAndUpdate", function (next) {
 });
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWT_TOKEN);
+  const token = jwt.sign(
+    { _id: this._id, isAdmin: this.isAdmin },
+    process.env.JWT_TOKEN
+  );
   return token;
 };
 

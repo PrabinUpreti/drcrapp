@@ -15,7 +15,8 @@ const partySchema = new mongoose.Schema({
     type: String,
   },
   createdBy: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   createdAt: {
