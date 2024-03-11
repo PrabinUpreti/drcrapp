@@ -1,4 +1,5 @@
 import Transaction from "../models/transactions.js";
+import jwt from "jsonwebtoken";
 
 export const getTransactions = async () => {
   try {
@@ -18,36 +19,42 @@ export const getTransaction = async (id) => {
   }
 };
 
-export const saveTransaction = async (param) => {
+export const saveTransaction = async (req, res, next) => {
   try {
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
     const newTransaction = new Transaction({
-      amount: param.amount,
-      drcr: param.drcr,
-      party: param.party,
-      createdBy: param.createdBy,
+      amount: req.body.amount,
+      drcr: req.body.drcr,
+      party: req.body.party,
+      createdBy: createdBy,
     });
     const savedTransaction = await newTransaction.save();
-    return savedTransaction;
+    res.json(savedTransaction);
   } catch (error) {
     console.log(error);
     return "Existing information";
   }
 };
 
-export const updateTransaction = async (id, param) => {
+export const updateTransaction = async (req, res, next) => {
   try {
+    const token = req.header("x-auth-token");
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const createdBy = decoded._id;
     const updatedTransaction = await Transaction.findOneAndUpdate(
-      { _id: id },
+      { _id: req.params.id },
       {
-        amount: param.amount,
-        drcr: param.drcr,
-        party: param.party,
-        createdBy: param.createdBy,
+        amount: req.body.amount,
+        drcr: req.body.drcr,
+        party: req.body.party,
+        createdBy: createdBy,
       },
       { new: true }
     );
-    if (updatedTransaction) return updatedTransaction;
-    else return "Party Not Found";
+    if (updatedTransaction) res.json(updatedTransaction);
+    else res.send("Party Not Found");
   } catch (error) {
     console.log(error);
   }

@@ -16,13 +16,9 @@ partyRoutes.get("/:id", async (req, res) => {
   res.json(await getParty(req.params.id));
 });
 
-partyRoutes.post("/", async (req, res) => {
-  res.json(await saveParty(req.body));
-});
+partyRoutes.post("/", saveParty);
 
-partyRoutes.put("/:id", async (req, res) => {
-  res.json(await updateParty(req.params.id, req.body));
-});
+partyRoutes.put("/:id", updateParty);
 
 partyRoutes.delete("/:id", async (req, res) => {
   res.json(await deleteParty(req.params.id));
