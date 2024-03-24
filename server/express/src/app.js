@@ -1,8 +1,14 @@
 import express from "express";
 import { dbConfig } from "../config/db.js";
 import router from "./routes/routers.js";
+import cors from "cors";
 
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use(express.json());
 
