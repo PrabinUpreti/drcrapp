@@ -2,7 +2,7 @@
   "name": "express",
   "version": "1.0.0",
   "description": "GrapgQL apis implementation",
-  "main": "index.js",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
     "start": "nodemon src/app.js"
