@@ -18,12 +18,22 @@ export const Parties = () => {
   };
 
   return (
-    <div>
-      <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-        {parties.map((item, index) => {
-          return (
-            <>
-              <li
+    <div className="w-full  p-4 bg-white border border-gray-200 shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex items-center justify-between mb-4">
+        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+          Parties
+        </h5>
+      </div>
+      <div className="flow-root">
+        <ul
+          role="list"
+          className="divide-y divide-gray-200 dark:divide-gray-700"
+        >
+          {/* <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700"> */}
+          {parties.map((item, index) => {
+            return (
+              <>
+                {/* <li
                 onClick={() => {
                   partyDetails(item._id);
                 }}
@@ -50,11 +60,40 @@ export const Parties = () => {
                     {item.phone}
                   </div>
                 </div>
-              </li>
-            </>
-          );
-        })}
-      </ul>
+              </li> */}
+
+                <li
+                  onClick={() => {
+                    partyDetails(item._id);
+                  }}
+                  className="py-3 sm:py-4 cursor-pointer"
+                >
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={item.photo}
+                        alt={item.name}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0 ms-4">
+                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                        {item.name}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                        {item.address}
+                      </p>
+                    </div>
+                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                      {item.phone}
+                    </div>
+                  </div>
+                </li>
+              </>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,31 +1,38 @@
 import { useState } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import { validateLogin } from "../utils/validation";
-import { login } from "../services/loginService";
+import { loginRequest } from "../services/loginService";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/auth";
 
 export const Login = () => {
+  const { error, login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  // const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setPasswordVisible(!passwordVisible);
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const credentialObj = {
-      email: email,
-      password: password,
-    };
-    const valid = validateLogin(credentialObj);
-    if (!valid) return setError("email or password is invalid");
-    const result = await login(credentialObj);
-    if (result.status == 200) {
-      localStorage.setItem("token", result.data);
-    } else setError(result.data);
+
+    await login(email, password);
+    //   const credentialObj = {
+    //     email: email,
+    //     password: password,
+    //   };
+
+    //   const valid = validateLogin(credentialObj);
+    //   if (!valid) return setError("email or password is invalid");
+    //   const result = await loginRequest(credentialObj);
+    //   if (result.status == 200) {
+    //     localStorage.setItem("token", result.data);
+    //     navigate("/");
+    //   } else setError(result.data);
   };
 
   return (
@@ -62,7 +69,7 @@ export const Login = () => {
               <input
                 id="password"
                 name="password"
-                type={passwordVisible ? "text" : "password"}
+                // type={passwordVisible ? "text" : "password"}
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
