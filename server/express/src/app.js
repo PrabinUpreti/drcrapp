@@ -11,6 +11,9 @@ app.use(
 );
 
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Express Restful Apis");
+});
 
 app.use("/api", router);
 dbConfig();
