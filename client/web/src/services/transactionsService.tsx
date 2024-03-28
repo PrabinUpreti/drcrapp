@@ -6,7 +6,7 @@ const result = {
 export const getTransaction = async (id) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/api/transactions/${id}`,
+      `http://localhost:8000/api/transactionOfParty/${id}`,
       {
         headers: {
           "x-auth-token": localStorage.getItem("token"),
