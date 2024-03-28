@@ -16,5 +16,5 @@ app.use("/api", router);
 dbConfig();
 
 app.listen(process.env.SERVER_PORT || 8000, () =>
-  console.log("Server is running in http://localhost:8000")
+  console.log(`Server is running at ${process.env.SERVER_PORT}`)
 );

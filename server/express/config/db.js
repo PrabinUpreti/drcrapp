@@ -2,9 +2,13 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 dotenv.config();
 export const dbConfig = () => {
+  let url = "";
+  process.env.MONGODBURL
+    ? (url = process.env.MONGODBURL)
+    : (url = `${process.env.DBMS}://${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB}`);
   mongoose
     .connect(
-      `${process.env.DBMS}://${process.env.HOST}:${process.env.DB_PORT}/${process.env.DB}`
+      url
       // {
       //   useNewUrlParser: true,
       //   useUnifiedTopology: true,
