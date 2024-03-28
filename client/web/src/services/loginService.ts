@@ -1,13 +1,13 @@
 import axios from "axios";
-export const login = async (credential: any) => {
+export const loginRequest = async (email, password) => {
   const result = {
     status: "",
     data: {},
   };
   try {
     const response = await axios.post("http://localhost:8000/api/auth", {
-      email: credential.email,
-      password: credential.password,
+      email,
+      password,
     });
 
     return { ...result, status: response.status, data: response.data };
