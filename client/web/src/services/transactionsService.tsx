@@ -25,3 +25,36 @@ export const getTransaction = async (id) => {
     };
   }
 };
+
+export const setTransactionRequest = async ({
+  amount,
+  drcr,
+  party,
+  description,
+}) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/api/transactions",
+      {
+        amount,
+        description,
+        drcr,
+        party,
+      },
+      {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+
+    return { ...result, status: response.status, data: response.data };
+  } catch (error: any) {
+    console.error("Login error:" + error.response.data);
+    return {
+      ...result,
+      status: error.response.status,
+      data: error.response.data,
+    };
+  }
+};
