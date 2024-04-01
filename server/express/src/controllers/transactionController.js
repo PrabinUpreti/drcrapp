@@ -27,6 +27,7 @@ export const saveTransaction = async (req, res, next) => {
     const newTransaction = new Transaction({
       amount: req.body.amount,
       drcr: req.body.drcr,
+      description: req.body.description,
       party: req.body.party,
       createdBy: createdBy,
     });
