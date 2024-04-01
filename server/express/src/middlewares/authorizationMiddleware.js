@@ -5,7 +5,7 @@ dotenv.config();
 export const authorize = async (req, res, next) => {
   const token = req.header("x-auth-token");
   if (!token) return res.status(401).send("Access denied No token provided");
-  console.log(token);
+  // console.log(token);
   try {
     const decoded = jwt.verify(token, process.env.JWT_TOKEN);
     req.user = decoded;
