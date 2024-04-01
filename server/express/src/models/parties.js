@@ -19,14 +19,8 @@ const partySchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  drAmounts: [Number],
+  crAmounts: [Number],
 });
 
 partySchema.pre("save", function (next) {
