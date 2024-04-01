@@ -11,7 +11,7 @@ export const login = async (req, res, next) => {
       req.body.password,
       existUser.password
     );
-    console.log(matchedPassword);
+    // console.log(matchedPassword);
     if (!matchedPassword)
       return res.status(400).send("Invalid User or Password");
 
