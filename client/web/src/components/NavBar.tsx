@@ -11,9 +11,13 @@ export const NavBar = () => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <NavLink to="/" className="text-white font-semibold text-lg">
-          DrCr App
-        </NavLink>
+        {credential.user ? (
+          <div className="text-white font-semibold text-lg">DrCr App</div>
+        ) : (
+          <NavLink to="/" className="text-white font-semibold text-lg">
+            DrCr App
+          </NavLink>
+        )}
         <div>
           {credential.user ? (
             <>
