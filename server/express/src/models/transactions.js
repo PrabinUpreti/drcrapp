@@ -9,6 +9,10 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   party: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Party",
