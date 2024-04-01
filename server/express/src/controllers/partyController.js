@@ -3,7 +3,20 @@ import jwt from "jsonwebtoken";
 
 export const getParties = async () => {
   try {
-    const parties = await Party.find();
+    // const parties = await Party.find();
+    const parties = await Party.aggregate([
+      {
+        $match: {
+          drcr: "dr",
+        },
+      },
+      {
+        $group: {
+          _id: null, // Group all documents into a single group
+          totalAmount: { $sum: "$amount" }, // Calculate the sum of the amounts
+        },
+      },
+    ]);
     return parties;
   } catch (error) {
     console.error("Error fetching parties:", error);
@@ -39,6 +52,7 @@ export const saveParty = async (req, res, next) => {
 };
 
 export const updateParty = async (req, res, next) => {
+  console.log("I am Party");
   try {
     const token = req.header("x-auth-token");
     const decoded = jwt.verify(token, process.env.JWT_TOKEN);
