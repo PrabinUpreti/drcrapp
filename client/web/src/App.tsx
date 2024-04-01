@@ -1,12 +1,15 @@
 import "./App.css";
 import { NavBar } from "./components/NavBar";
-import { AuthProvider, useAuth } from "./utils/auth";
+import { AuthProvider } from "./utils/auth";
 import { ProtectedRoutes } from "./pages/ProtectedRoutes";
+import { StoreProvider } from "./utils/store";
 function App() {
   return (
     <AuthProvider>
-      <NavBar />
-      <ProtectedRoutes />
+      <StoreProvider>
+        <NavBar />
+        <ProtectedRoutes />
+      </StoreProvider>
     </AuthProvider>
   );
 }
