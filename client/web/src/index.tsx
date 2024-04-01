@@ -9,10 +9,10 @@ import {
   RouterProvider,
   BrowserRouter,
 } from "react-router-dom";
-import { Login } from "./pages/login";
-import { Parties } from "./pages/Parties";
+import { Login } from "./pages/Login";
+import { Parties } from "./pages/Parties/Parties";
 import { NavBar } from "./components/NavBar";
-import { Logout } from "./pages/logout";
+import { Logout } from "./pages/Logout";
 
 // const router = createBrowserRouter([
 //   {
