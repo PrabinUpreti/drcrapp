@@ -1,0 +1,27 @@
+{
+  "parties": {
+    "_id": { "$oid": "65e478b54afb7612dc07972c" },
+    "name": "Pratima Upreti",
+    "phone": "9845315037",
+    "address": "Hetauda 8, Kamane",
+    "photo": "https://picsum.photos/200/300",
+    "drAmounts": [20, 40, 50, 45, 90, 200],
+    "crAmounts": [20, 40, 50, 45, 87],
+    "createdBy": { "$oid": "65e73ebb80a0b4f4db8e7862" },
+    "createdAt": { "$date": { "$numberLong": "1709471925149" } },
+    "updatedAt": { "$date": { "$numberLong": "1711706916852" } },
+    "__v": { "$numberInt": "0" }
+  },
+  "transactions": {
+    "_id": { "$oid": "660689ffc8b93be1bf2c890d" },
+    "amount": { "$numberInt": "50" },
+    "drcr": "CR",
+    "time": { "$date": { "$numberLong": "1711704575862" } },
+    "description": "suman dai ko",
+    "party": { "$oid": "65e9f18b4f8e92ed24fab40e" },
+    "createdBy": { "$oid": "65e73ed880a0b4f4db8e7865" },
+    "createdAt": { "$date": { "$numberLong": "1711704575862" } },
+    "updatedAt": { "$date": { "$numberLong": "1711704575863" } },
+    "__v": { "$numberInt": "0" }
+  }
+}
