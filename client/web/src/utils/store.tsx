@@ -13,6 +13,8 @@ export const StoreProvider = ({ children }) => {
   const [parties, setParties] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [isDisable, setIsDisable] = useState(false);
+  const [spin, setSpin] = useState(false);
+
   const [error, setError] = useState(null);
   const [party, setParty] = useState({
     name: null,
@@ -87,6 +89,8 @@ export const StoreProvider = ({ children }) => {
         parties,
         party,
         error,
+        spin,
+        setSpin,
         navigate,
         setError,
         setParty,

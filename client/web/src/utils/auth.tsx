@@ -7,6 +7,7 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [credential, setCredential] = useState({});
+  const [isDisable, setIsDisable] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -24,7 +25,11 @@ export const AuthProvider = ({ children }) => {
         admin: decodedtoken.admin,
       });
       navigate("/parties");
-    } else setError(result.data);
+      setIsDisable(false);
+    } else {
+      setError(result.data);
+      setIsDisable(false);
+    }
   };
 
   const logout = () => {
@@ -55,7 +60,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ credential, login, error, logout }}>
+    <AuthContext.Provider
+      value={{ credential, login, error, logout, isDisable, setIsDisable }}
+    >
       {children}
     </AuthContext.Provider>
   );

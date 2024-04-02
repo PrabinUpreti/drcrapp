@@ -4,19 +4,23 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useStore } from "../../utils/store";
 import { MdAdd, MdDelete, MdDoDisturb, MdEdit, MdPhone } from "react-icons/md";
 import React from "react";
+import { Spinner } from "../../components/Spinner";
 
 export const Parties = () => {
-  const { parties, setParties, navigate, getDrSum, getCrSum } = useStore();
+  const { parties, setParties, navigate, getDrSum, getCrSum, spin, setSpin } =
+    useStore();
 
   const dr = useRef();
   const cr = useRef();
   useEffect(() => {
+    setSpin(true);
     async function partyService() {
       const res: any = await getParties();
       setParties(res.data);
+      setSpin(false);
     }
 
-    !parties.length ? partyService() : console.log(parties);
+    !parties.length ? partyService() : setSpin(false);
   }, []);
 
   const partyDetails = (id, party) => {
@@ -29,7 +33,7 @@ export const Parties = () => {
     // console.log(item);
   };
 
-  return (
+  return !spin ? (
     <div className="w-full p-4 bg-white border border-gray-200 shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
       <div className="flex justify-between mb-5">
         <div className="flex items-center justify-between mb-4">
@@ -137,5 +141,7 @@ export const Parties = () => {
         </ul>
       </div>
     </div>
+  ) : (
+    <Spinner />
   );
 };

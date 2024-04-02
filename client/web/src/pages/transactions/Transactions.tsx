@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getTransaction } from "../../services/transactionsService";
 import { useStore } from "../../utils/store";
 import { MdAdd, MdDelete, MdDoDisturb, MdEdit, MdPhone } from "react-icons/md";
+import { Spinner } from "../../components/Spinner";
 
 export function Transactions() {
   const {
@@ -13,6 +14,8 @@ export function Transactions() {
     getCrSum,
     getDrSum,
     parties,
+    spin,
+    setSpin,
   } = useStore();
   const param = useParams();
   const [indexParty, setIndexParty] = useState(null);
@@ -20,6 +23,7 @@ export function Transactions() {
     navigate("/add_transaction", { state: param });
   };
   useEffect(() => {
+    setSpin(true);
     console.log(param.id);
     const stateFromParty = location.state;
     console.log(stateFromParty);
@@ -36,6 +40,7 @@ export function Transactions() {
     async function transactionService() {
       const res: any = await getTransaction(param.id);
       setTransactions(res.data);
+      setSpin(false);
     }
     transactionService();
     console.log(transactions);
@@ -87,50 +92,53 @@ export function Transactions() {
           </div>
         </div>
       </div>
-
-      <ul className="w-full dark:divide-gray-700">
-        {transactions.length ? (
-          transactions.map((item, index) => (
-            <li
-              key={index}
-              className={`px-10 py-3 ${
-                item.drcr == "DR" ? "bg-red-400" : "bg-green-500"
-              }  justify-center text-4xl`}
-            >
-              <div className="flex items-center w-full justify-between">
-                <p className="text-sm font-medium text-gray-900 truncate ">
-                  {index + 1}
-                </p>
-                <p className="text-sm font-medium text-gray-900 truncate ">
-                  {item.createdAt}
-                </p>
-                <p className="text-sm font-medium text-gray-900 truncate ">
-                  {"Rs"} {item.drcr == "DR" ? "-" : ""}
-                  {""}
-                  {item.amount}
-                </p>
-                <p className="text-sm font-medium text-gray-900 truncate ">
-                  {item.description}
-                </p>
-                <div>
-                  <button className="rounded bg-blue-400 px-3 py-1 text-gray-900 ">
-                    <MdEdit className="size-6" />
-                  </button>
-                  <button className=" ml-2 rounded bg-red-700 px-3 py-1 text-gray-900 ">
-                    <MdDelete className="size-6" />
-                  </button>
+      {!spin ? (
+        <ul className="w-full dark:divide-gray-700">
+          {transactions.length ? (
+            transactions.map((item, index) => (
+              <li
+                key={index}
+                className={`px-10 py-3 ${
+                  item.drcr == "DR" ? "bg-red-400" : "bg-green-500"
+                }  justify-center text-4xl`}
+              >
+                <div className="flex items-center w-full justify-between">
+                  <p className="text-sm font-medium text-gray-900 truncate ">
+                    {index + 1}
+                  </p>
+                  <p className="text-sm font-medium text-gray-900 truncate ">
+                    {item.createdAt}
+                  </p>
+                  <p className="text-sm font-medium text-gray-900 truncate ">
+                    {"Rs"} {item.drcr == "DR" ? "-" : ""}
+                    {""}
+                    {item.amount}
+                  </p>
+                  <p className="text-sm font-medium text-gray-900 truncate ">
+                    {item.description}
+                  </p>
+                  <div>
+                    <button className="rounded bg-blue-400 px-3 py-1 text-gray-900 ">
+                      <MdEdit className="size-6" />
+                    </button>
+                    <button className=" ml-2 rounded bg-red-700 px-3 py-1 text-gray-900 ">
+                      <MdDelete className="size-6" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))
-        ) : (
-          <div className="flex h-96 items-center justify-center">
-            <p className="font-black text-gray-600 text-2xl">
-              No Data Found ! Add new data
-            </p>
-          </div>
-        )}
-      </ul>
+              </li>
+            ))
+          ) : (
+            <div className="flex h-96 items-center justify-center">
+              <p className="font-black text-gray-600 text-2xl">
+                No Data Found ! Add new data
+              </p>
+            </div>
+          )}
+        </ul>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 }
