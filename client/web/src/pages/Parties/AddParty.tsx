@@ -35,7 +35,9 @@ export const AddParty = () => {
     }
     setError(null);
     const response = await setPartyRequest(party);
-    response.status === 200 ? updatePartyState(response.data) : "";
+    response.status === 200
+      ? updatePartyState(response.data)
+      : console.log("else");
     console.log(response);
     navigate(-1);
     setIsDisable(false);

@@ -48,8 +48,9 @@ export const EditParty = () => {
     }
     setError(null);
     const response = await updatePartyRequest(party);
-    response.status === 200 ? updateEditPartyState(response.data) : "";
-
+    response.status === 200
+      ? updateEditPartyState(response.data)
+      : console.log("else");
     console.log(response);
 
     navigate(-1);
