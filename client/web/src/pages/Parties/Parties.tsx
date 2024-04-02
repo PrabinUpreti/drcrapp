@@ -93,7 +93,7 @@ export const Parties = () => {
                           className={`${
                             parseInt(cr.current) - parseInt(dr.current) < 1
                               ? parseInt(cr.current) - parseInt(dr.current) == 0
-                                ? "text-white"
+                                ? "text-gray-700 dark:text-white"
                                 : "text-red-500"
                               : " text-green-500"
                           }`}
