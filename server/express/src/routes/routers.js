@@ -11,8 +11,8 @@ import transactionOfPartyRoutes from "./transactionOfPartyRoutes.js";
 import userPartyRoutes from "./userPartyRoutes.js";
 import userPartyAmountRoutes from "./userPartyAmountRoutes.js";
 router.post("/auth", loginValidation, login);
-router.use(authorize);
 router.use("/users", userRoutes); // admin all access
+router.use(authorize);
 router.use("/parties", partyRoutes); // admin all access
 router.use("/userParties", userPartyRoutes); // user
 router.use("/userPartiesAmount", userPartyAmountRoutes); // user
