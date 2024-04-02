@@ -5,10 +5,13 @@ export const loginRequest = async (email, password) => {
     data: {},
   };
   try {
-    const response = await axios.post("http://localhost:8000/api/auth", {
-      email,
-      password,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_END_POINT}/api/auth`,
+      {
+        email,
+        password,
+      }
+    );
 
     return { ...result, status: response.status, data: response.data };
   } catch (error: any) {

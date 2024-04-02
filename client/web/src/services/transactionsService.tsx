@@ -6,7 +6,7 @@ const result = {
 export const getTransaction = async (id) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/api/transactionOfParty/${id}`,
+      `${process.env.REACT_APP_END_POINT}/api/transactionOfParty/${id}`,
       {
         headers: {
           "x-auth-token": localStorage.getItem("token"),
@@ -34,7 +34,7 @@ export const setTransactionRequest = async ({
 }) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/api/transactions",
+      `${process.env.REACT_APP_END_POINT}/api/transactions`,
       {
         amount,
         description,
