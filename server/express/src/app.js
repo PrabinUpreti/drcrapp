@@ -2,11 +2,13 @@ import express from "express";
 import { dbConfig } from "../config/db.js";
 import router from "./routes/routers.js";
 import cors from "cors";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
+console.log("URL", process.env.CLIENT_URL);
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: `${process.env.CLIENT_URL}`,
   })
 );
 
