@@ -58,8 +58,8 @@ export const Parties = () => {
           {parties.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <li className="max-w-full">
-                  <div className="py-5 space-x-3 lg:space-x-5 flex justify-between cursor-pointer">
+                <li className="max-w-full px-3">
+                  <div className="py-5 space-x-3 flex justify-between md:justify-start cursor-pointer">
                     <div
                       onClick={() => {
                         partyDetails(item._id, item);
@@ -76,7 +76,7 @@ export const Parties = () => {
                       onClick={() => {
                         partyDetails(item._id, item);
                       }}
-                      className=" flex flex-col min-w-40 justify-center space-y-1"
+                      className=" flex flex-col w-36 justify-center space-y-0"
                     >
                       <p className="text-xl font-bold text-gray-900 truncate dark:text-white">
                         {item.name}
@@ -84,15 +84,15 @@ export const Parties = () => {
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                         {item.address}
                       </p>
-                      <div className="flex space-x-5">
-                        <p className="text-red-500 truncate">
+                      <div className="flex space-x-3">
+                        <p className="text-red-500 truncate text-sm">
                           Dr. {(dr.current = getDrSum(item.drAmounts))}
                         </p>
-                        <p className="text-green-500 truncate">
+                        <p className="text-green-500 truncate text-sm">
                           Cr. {(cr.current = getCrSum(item.crAmounts))}
                         </p>
                       </div>
-                      <p className=" text-white text-2xl font-bold truncate">
+                      <p className=" text-white text-xl font-bold truncate">
                         <span
                           className={`${
                             parseInt(cr.current) - parseInt(dr.current) < 1
@@ -109,7 +109,7 @@ export const Parties = () => {
                         </span>
                       </p>
                     </div>
-                    <div className=" flex flex-col justify-center max-w-32 space-y-3 text-base font-semibold text-gray-900 dark:text-white">
+                    <div className=" flex flex-col justify-center max-w-32 space-y-1 text-base font-semibold text-gray-900 dark:text-white">
                       <div>
                         <p className="flex">
                           <MdPhone className="size-6" />
