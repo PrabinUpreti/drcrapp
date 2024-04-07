@@ -9,6 +9,7 @@ console.log("URL", process.env.CLIENT_URL);
 app.use(
   cors({
     origin: `${process.env.CLIENT_URL}`,
+    exposedHeaders: "Authorization",
   })
 );
 

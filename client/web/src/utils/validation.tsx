@@ -13,6 +13,20 @@ export const validateLogin = (credential: any) => {
   else return true;
 };
 
+const validateSignUpScheme = Joi.object({
+  username: Joi.string().required(),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
+});
+
+export const validateSignUp = (credential: any) => {
+  const validatedUser = validateSignUpScheme.validate(credential);
+  if (validatedUser.error) return false;
+  else return true;
+};
+
 const validatePartyScheme = Joi.object({
   name: Joi.string().required().messages({ name: `Provide valid name` }),
   phone: Joi.string()

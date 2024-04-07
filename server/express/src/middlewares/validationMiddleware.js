@@ -9,7 +9,8 @@ const userValidationSchema = Joi.object({
 
 export const userValidation = (req, res, next) => {
   const validatedUser = userValidationSchema.validate(req.body);
-  if (validatedUser.error) res.json(validatedUser.error.details[0].message);
+  if (validatedUser.error)
+    res.status(400).json(validatedUser.error.details[0].message);
   else next();
 };
 

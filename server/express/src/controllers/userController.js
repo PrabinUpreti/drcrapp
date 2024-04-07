@@ -34,7 +34,7 @@ export const getMe = async (userId) => {
 export const saveUser = async (req, res, next) => {
   try {
     const existUser = await User.findOne({ email: req.body.email });
-    if (existUser) return res.send("User already exist");
+    if (existUser) return res.status(400).send("User already exist");
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
@@ -43,11 +43,14 @@ export const saveUser = async (req, res, next) => {
     const savedUser = await newUser.save();
     const token = savedUser.generateAuthToken();
     res
-      .header("x-auth-toket", token)
+      .header({
+        "Access-Control-Expose-Headers": "x-auth-token",
+        "x-auth-token": token,
+      })
       .json(lodash.pick(savedUser, ["_id", "username", "email"]));
   } catch (error) {
     console.log(error);
-    res.send("Existing information");
+    res.status(400).send(`${req.body.username} is not available`);
   }
 };
 
