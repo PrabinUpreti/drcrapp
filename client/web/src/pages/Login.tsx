@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 
 export const Login = () => {
-  const { error, login, isDisable, setIsDisable } = useAuth();
+  const { error, login, isDisable, setIsDisable, setError } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
@@ -21,19 +21,14 @@ export const Login = () => {
     e.preventDefault();
     setIsDisable(true);
 
-    await login(email, password);
-    //   const credentialObj = {
-    //     email: email,
-    //     password: password,
-    //   };
+    const credentialObj = {
+      email: email,
+      password: password,
+    };
 
-    //   const valid = validateLogin(credentialObj);
-    //   if (!valid) return setError("email or password is invalid");
-    //   const result = await loginRequest(credentialObj);
-    //   if (result.status == 200) {
-    //     localStorage.setItem("token", result.data);
-    //     navigate("/");
-    //   } else setError(result.data);
+    const valid = validateLogin(credentialObj);
+    if (!valid) return setError("email or password is invalid");
+    await login(email, password);
   };
 
   return (
