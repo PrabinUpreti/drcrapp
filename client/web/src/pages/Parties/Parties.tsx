@@ -34,10 +34,10 @@ export const Parties = () => {
   };
 
   return !spin ? (
-    <div className="w-full p-4 bg-white border border-gray-200 shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full p-4 bg-white border border-gray-200 shadow sm:p-8">
       <div className="flex justify-between mb-5">
         <div className="flex items-center justify-between mb-4">
-          <h5 className="text-3xl font-bold uppercase leading-none text-gray-900 dark:text-white">
+          <h5 className="text-3xl font-bold uppercase leading-none text-gray-900">
             Parties
           </h5>
         </div>
@@ -53,7 +53,7 @@ export const Parties = () => {
       <div className="flow-root">
         <ul
           role="list"
-          className="divide-y flex flex-wrap justify-center max-w-full divide-gray-200 dark:divide-gray-700"
+          className="divide-y flex flex-wrap justify-center max-w-full divide-gray-200"
         >
           {parties.map((item, index) => {
             return (
@@ -78,10 +78,10 @@ export const Parties = () => {
                       }}
                       className=" flex flex-col w-36 justify-center space-y-0"
                     >
-                      <p className="text-xl font-bold text-gray-900 truncate dark:text-white">
+                      <p className="text-xl font-bold text-gray-900 truncate">
                         {item.name}
                       </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                      <p className="text-sm text-gray-500 truncate">
                         {item.address}
                       </p>
                       <div className="flex space-x-3">
@@ -97,7 +97,7 @@ export const Parties = () => {
                           className={`${
                             parseInt(cr.current) - parseInt(dr.current) < 1
                               ? parseInt(cr.current) - parseInt(dr.current) == 0
-                                ? "text-gray-700 dark:text-white"
+                                ? "text-gray-700"
                                 : "text-red-500"
                               : " text-green-500"
                           }`}
@@ -109,7 +109,7 @@ export const Parties = () => {
                         </span>
                       </p>
                     </div>
-                    <div className=" flex flex-col justify-center max-w-32 space-y-1 text-base font-semibold text-gray-900 dark:text-white">
+                    <div className=" flex flex-col justify-center max-w-32 space-y-1 text-base font-semibold text-gray-900">
                       <div>
                         <p className="flex">
                           <MdPhone className="size-6" />

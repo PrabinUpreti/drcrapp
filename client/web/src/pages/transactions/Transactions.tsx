@@ -48,7 +48,7 @@ export function Transactions() {
 
   return (
     <div className="">
-      <div className="bg-gray-800 text-white p-10">
+      <div className=" p-10">
         <div className="flex justify-between">
           <span className="uppercase text-lg font-bold">Transaction</span>
           <button
@@ -93,7 +93,7 @@ export function Transactions() {
         </div>
       </div>
       {!spin ? (
-        <ul className="w-full dark:divide-gray-700">
+        <ul className="w-full">
           {transactions.length ? (
             transactions.map((item, index) => (
               <li
