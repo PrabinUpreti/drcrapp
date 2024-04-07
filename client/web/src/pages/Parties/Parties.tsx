@@ -34,7 +34,7 @@ export const Parties = () => {
   };
 
   return !spin ? (
-    <div className="w-full p-4 bg-white border border-gray-200 shadow sm:p-8">
+    <div className="w-full p-4 sm:p-8">
       <div className="flex justify-between mb-5">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-3xl font-bold uppercase leading-none text-gray-900">
@@ -53,13 +53,13 @@ export const Parties = () => {
       <div className="flow-root">
         <ul
           role="list"
-          className="divide-y flex flex-wrap justify-center max-w-full divide-gray-200"
+          className=" flex flex-wrap justify-center max-w-full divide-gray-200"
         >
           {parties.map((item, index) => {
             return (
               <React.Fragment key={index}>
                 <li className="max-w-full px-3">
-                  <div className="py-5 space-x-3 flex justify-between md:justify-start cursor-pointer">
+                  <div className="p-5 space-x-3 flex justify-between md:justify-start cursor-pointer  shadow-md rounded-lg ">
                     <div
                       onClick={() => {
                         partyDetails(item._id, item);
@@ -69,7 +69,7 @@ export const Parties = () => {
                       <img
                         className="h-24 rounded-xl"
                         src={item.photo}
-                        alt={item.name}
+                        alt="Img"
                       />
                     </div>
                     <div
