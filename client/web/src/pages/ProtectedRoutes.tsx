@@ -15,6 +15,10 @@ import { PageNotFound } from "./PageNotFound";
 import { AddTransaction } from "./transactions/AddTransaction";
 import { EditTransaction } from "./transactions/EditTransaction";
 import { DeleteTransaction } from "./transactions/DeleteTransaction";
+import { SignUp } from "./SignUp";
+import { Dashboard } from "./Dashboard";
+import { Wallet } from "./wallet/Wallet";
+import { Expenses } from "./expenses/Expenses";
 
 export const ProtectedRoutes = () => {
   const { credential } = useAuth();
@@ -32,6 +36,9 @@ export const ProtectedRoutes = () => {
           <Route path="add_transaction" element={<AddTransaction />} />
           <Route path="edit_transaction" element={<EditTransaction />} />
           <Route path="delete_transaction" element={<DeleteTransaction />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="wallet" element={<Wallet />} />
+          <Route path="expenses" element={<Expenses />} />
 
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
@@ -41,6 +48,7 @@ export const ProtectedRoutes = () => {
         <>
           <Route path="/" element={<Home />}></Route>
           <Route path="login" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
         </>
       )}
     </Routes>
