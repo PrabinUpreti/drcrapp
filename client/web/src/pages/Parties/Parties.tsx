@@ -58,7 +58,7 @@ export const Parties = () => {
           {parties.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <li className="max-w-full px-3">
+                <li className="max-w-full">
                   <div className="p-5 space-x-3 flex justify-between md:justify-start cursor-pointer  shadow-md rounded-lg ">
                     <div
                       onClick={() => {
