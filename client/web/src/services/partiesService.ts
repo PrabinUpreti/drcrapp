@@ -5,10 +5,10 @@ const result = {
 };
 export const getParties = async () => {
   try {
-    console.log(`${process.env.REACT_APP_END_POINT}`);
+    console.log(`${import.meta.env.VITE_END_POINT}`);
 
     const response = await axios.get(
-      `${process.env.REACT_APP_END_POINT}/api/userParties`,
+      `${import.meta.env.VITE_END_POINT}/api/userParties`,
       {
         headers: {
           "x-auth-token": localStorage.getItem("token"),
@@ -30,7 +30,7 @@ export const getParties = async () => {
 export const setPartyRequest = async ({ name, phone, address, photo }) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/parties`,
+      `${import.meta.env.VITE_END_POINT}/api/parties`,
       {
         name,
         phone,
@@ -64,7 +64,7 @@ export const updatePartyRequest = async ({
 }) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_END_POINT}/api/parties/${id}`,
+      `${import.meta.env.VITE_END_POINT}/api/parties/${id}`,
       {
         name,
         phone,
@@ -92,7 +92,7 @@ export const updatePartyRequest = async ({
 export const updatePartyAmountRequest = async ({ amount, drcr, party }) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_END_POINT}/api/userPartiesAmount/${party}`,
+      `${import.meta.env.VITE_END_POINT}/api/userPartiesAmount/${party}`,
       {
         amount,
         drcr,

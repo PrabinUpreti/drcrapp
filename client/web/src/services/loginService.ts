@@ -6,7 +6,7 @@ export const loginRequest = async (email, password) => {
   };
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/auth`,
+      `${import.meta.env.VITE_END_POINT}/api/auth`,
       {
         email,
         password,

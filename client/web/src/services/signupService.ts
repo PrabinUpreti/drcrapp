@@ -6,7 +6,7 @@ export const signUpRequest = async (username, email, password) => {
   };
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_END_POINT}/api/users`,
+      `${import.meta.env.VITE_END_POINT}/api/users`,
       {
         username,
         email,

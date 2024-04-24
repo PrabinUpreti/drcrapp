@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [showNav, setShowNav] = useState(false);
 
   const login = async (user, password) => {
-    console.log("user", user);
+    console.log("user", password);
 
     const result = await loginRequest(user, password);
     if (result.status === 200) {
