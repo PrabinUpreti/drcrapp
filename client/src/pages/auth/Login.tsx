@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
-import { validateLogin } from "../utils/validation";
-import { loginRequest } from "../services/loginService";
+import { validateLogin } from "../../utils/validation";
+import { loginRequest } from "../../services/loginService";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../utils/auth";
+import { useAuth } from "../../utils/auth";
 
 export const Login = () => {
   const { error, login, isDisable, setIsDisable, setError } = useAuth();

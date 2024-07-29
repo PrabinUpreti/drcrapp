@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuth } from "../utils/auth";
-import { validateSignUp } from "../utils/validation";
+import { useAuth } from "../../utils/auth";
+import { validateSignUp } from "../../utils/validation";
 
 export const SignUp = () => {
   const { error, isDisable, setIsDisable, setError, register } = useAuth();

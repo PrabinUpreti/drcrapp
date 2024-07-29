@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useAuth } from "../utils/auth";
-import { useStore } from "../utils/store";
+import { useAuth } from "../../utils/auth";
+import { useStore } from "../../utils/store";
 
 export const Logout = () => {
   const { parties, setParties, navigate, getDrSum, getCrSum } = useStore();
